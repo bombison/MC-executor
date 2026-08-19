@@ -65,6 +65,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-container li.active a,
@@ -79,7 +80,7 @@
             height: 60vh;
             min-height: 400px;
             background: linear-gradient(to bottom, rgba(18, 19, 22, 0.2), var(--bg-dark)),
-                        url('https://picsum.photos/1920/1080?blur=1') center/cover no-repeat;
+                        url('input_file_0.png') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -237,7 +238,7 @@
     <nav>
         <ul class="nav-container">
             <li class="active"><a href="#home">Home</a></li>
-            <li><a href="#download">Download & Install</a></li>
+            <li><a id="download-btn">Download & Install</a></li>
         </ul>
     </nav>
 
@@ -267,7 +268,7 @@
         <div class="os-container">
             <div class="os-info">
                 <p>MCE is built out of passion and shared freely with the community under the MIT License. Whether you want to see how the shader works under the hood or contribute to making it even better, the source code is free to explore.</p>
-                <a href="#" class="btn-repo">
+                <a href="https://github.com/bombison/mce" class="btn-repo" target="_blank" rel="noopener noreferrer">
                     <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                     </svg>
@@ -277,8 +278,8 @@
             
             <div class="os-preview">
                 <div style="margin-bottom: 10px; color: #fff; font-weight: bold;">About</div>
-                <div style="margin-bottom: 10px;">A Vibrant Visual Shader for MCBE</div>
-                <div style="color: var(--accent-green); margin-bottom: 15px;">🔗 bombison.github.io/mce/</div>
+                <div style="margin-bottom: 10px;">An application for Minecraft: Bedrock</div>
+                <div style="margin-bottom: 15px;">🔗 <a href="https://github.com/bombison/mce" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green);">bombison.github.io/mce/</a></div>
                 <div style="display: flex; gap: 15px; border-top: 1px solid #222; padding-top: 10px;">
                     <span>📄 MIT License</span>
                     <span>⭐ 17 stars</span>
@@ -294,6 +295,22 @@
         <p>RenderDragon Materials is assets of Minecraft: Bedrock Edition and Minecraft is trademark of Mojang. This site is not affiliated with Mojang or Microsoft.</p>
         <p>Thanks to <a href="#">vutall</a> for making such a <a href="#">great tool</a> and to everyone who has helped me.</p>
     </footer>
+
+    <script>
+        const downloadBtn = document.getElementById('download-btn');
+
+        downloadBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
