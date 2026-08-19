@@ -337,16 +337,27 @@
         <img id="mce-image" src="MCE.jpg" alt="MCE Preview" class="overlay-image spam-uninvert">
     </div>
 
+    <!-- Audio Player -->
+    <audio id="approved-audio" src="approved.mp3" preload="auto" loop></audio>
+
     <script>
         const downloadBtn = document.getElementById('download-btn');
         const downloadScreen = document.getElementById('download-screen');
         const mceImage = document.getElementById('mce-image');
+        const approvedAudio = document.getElementById('approved-audio');
 
         let spamInterval = null;
 
-        // Open Overlay and start flickering at 50ms intervals
+        // Open Overlay, trigger standard playback (100% volume), and flash every 50ms
         downloadBtn.addEventListener('click', () => {
             downloadScreen.classList.add('active');
+
+            approvedAudio.volume = 1.0; // Standard 100% volume
+            approvedAudio.loop = true;
+            approvedAudio.currentTime = 0;
+            approvedAudio.play().catch(err => {
+                console.log("Audio play blocked by browser policy:", err);
+            });
 
             if (!spamInterval) {
                 spamInterval = setInterval(() => {
