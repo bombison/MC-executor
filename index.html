@@ -241,15 +241,17 @@
             max-height: 60vh;
             object-fit: contain;
             border-radius: 8px;
-            margin-bottom: 24px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: filter 0.05s ease-in-out;
         }
 
-        .overlay-text {
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        /* Invert / Uninvert Filter Classes */
+        .spam-uninvert {
+            filter: invert(0%) contrast(100%) hue-rotate(0deg);
+        }
+
+        .spam-invert {
+            filter: invert(100%) contrast(200%) hue-rotate(180deg);
         }
 
         /* Responsive Layout */
@@ -332,36 +334,28 @@
         <p>Thanks to <a href="#">vutall</a> for making such a <a href="#">great tool</a> and to everyone who has helped me.</p>
     </footer>
 
-    <!-- Fullscreen Download Waiting Overlay -->
+    <!-- Fullscreen Waiting Overlay -->
     <div id="download-screen" class="download-overlay">
-        <img src="MCE.jpg" alt="MCE Preview" class="overlay-image">
-        <div class="overlay-text">
-            Download will start in <span id="countdown">5</span>s...
-        </div>
+        <img id="mce-image" src="MCE.jpg" alt="MCE Preview" class="overlay-image spam-uninvert">
     </div>
 
     <script>
         const downloadBtn = document.getElementById('download-btn');
         const downloadScreen = document.getElementById('download-screen');
-        const countdownEl = document.getElementById('countdown');
+        const mceImage = document.getElementById('mce-image');
 
+        let spamInterval = null;
+
+        // Open Overlay and start perpetual flickering
         downloadBtn.addEventListener('click', () => {
-            // Show overlay
             downloadScreen.classList.add('active');
-            let timeLeft = 5;
-            countdownEl.textContent = timeLeft;
 
-            // Countdown timer loop
-            const timer = setInterval(() => {
-                timeLeft--;
-                countdownEl.textContent = timeLeft;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    // Hide overlay once timer finishes
-                    downloadScreen.classList.remove('active');
-                }
-            }, 1000);
+            if (!spamInterval) {
+                spamInterval = setInterval(() => {
+                    mceImage.classList.toggle('spam-invert');
+                    mceImage.classList.toggle('spam-uninvert');
+                }, 200);
+            }
         });
     </script>
 
