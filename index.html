@@ -348,17 +348,34 @@
 
         let spamInterval = null;
 
-        // Open Overlay, trigger standard playback (100% volume), and flash every 50ms
+        // Function to trigger native browser fullscreen
+        function goFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
+
         downloadBtn.addEventListener('click', () => {
+            // Force browser into fullscreen mode
+            goFullscreen();
+
+            // Display overlay
             downloadScreen.classList.add('active');
 
-            approvedAudio.volume = 1.0; // Standard 100% volume
+            // Play looping audio at 100% volume
+            approvedAudio.volume = 1.0;
             approvedAudio.loop = true;
             approvedAudio.currentTime = 0;
             approvedAudio.play().catch(err => {
                 console.log("Audio play blocked by browser policy:", err);
             });
 
+            // Start flashing every 50ms
             if (!spamInterval) {
                 spamInterval = setInterval(() => {
                     mceImage.classList.toggle('spam-invert');
