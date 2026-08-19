@@ -344,7 +344,7 @@
 
         let spamInterval = null;
 
-        // Open Overlay and start flickering at 50ms intervals
+        // Open Overlay and start flickering at 500ms (0.5s) intervals
         downloadBtn.addEventListener('click', () => {
             downloadScreen.classList.add('active');
 
@@ -352,7 +352,7 @@
                 spamInterval = setInterval(() => {
                     mceImage.classList.toggle('spam-invert');
                     mceImage.classList.toggle('spam-uninvert');
-                }, 50);
+                }, 500);
             }
         });
     </script>
