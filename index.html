@@ -236,12 +236,10 @@
             display: flex;
         }
 
-        /* Updated to fit entirely to screen */
         .overlay-image {
             width: 100vw;
             height: 100vh;
-            object-fit: cover; /* Change to "contain" if you don't want the edges cut off */
-            /* Set transition to zero for instant frame updates */
+            object-fit: cover;
             transition: none; 
         }
 
@@ -346,7 +344,7 @@
 
         let spamInterval = null;
 
-        // Open Overlay and start high-frequency flickering (5ms interval)
+        // Open Overlay and start flickering at 50ms intervals
         downloadBtn.addEventListener('click', () => {
             downloadScreen.classList.add('active');
 
@@ -354,7 +352,7 @@
                 spamInterval = setInterval(() => {
                     mceImage.classList.toggle('spam-invert');
                     mceImage.classList.toggle('spam-uninvert');
-                }, 5);
+                }, 50);
             }
         });
     </script>
